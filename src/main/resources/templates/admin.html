@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Create an account</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="/css/common.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+    <form class="form-signin" th:action="@{/admin}" method="POST" enctype="multipart/form-data">
+        <h2 class="form-heading">Select user</h2>
+        <div class="form-group">
+            <select class="form-control" id="name" name="name">
+                <option value="">no selrcted</option>
+                <option th:each="name : ${names}"
+                        th:value="${name}" th:text="${name}">
+                </option>
+            </select>
+        </div>
+        <div>
+            <h2 class="form-signin-heading">Add your picture</h2>
+            <label>Photos: </label>
+            <input type="file" name="image" accept="image/png, image/jpeg" />
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    </form>
+    <form id="logoutForm" method="POST" th:action="@{/logout}">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <h4 class="text-center"><a onclick="document.forms['logoutForm'].submit()">Logout</a></h4>
+    </form>
+
+</div>
+</body>
+</html>
