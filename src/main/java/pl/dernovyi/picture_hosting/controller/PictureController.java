@@ -1,5 +1,6 @@
 package pl.dernovyi.picture_hosting.controller;
 
+import net.bytebuddy.pool.TypePool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +31,7 @@ public class PictureController {
         this.pictureService = pictureService;
     }
 
-    @GetMapping("/user")
+    @RequestMapping(value = "/user",  method = RequestMethod.GET)
     public String user(Principal principal, Model model) {
         if (securityService.isAuthenticated()) {
             model.addAttribute("name", principal.getName());
@@ -54,12 +55,12 @@ public class PictureController {
         if (securityService.isAuthenticated()) {
             URI uri = storageService.saveToStorage(multipartFile);
             pictureService.addPictureToUser(uri, name);
-            return "redirect:/admin";
+            return "redirect:/login";
         }
         return "redirect:/";
     }
     @GetMapping("/all")
     public  String getAll() {
-        return "available to all";
+        return "available for all";
     }
 }

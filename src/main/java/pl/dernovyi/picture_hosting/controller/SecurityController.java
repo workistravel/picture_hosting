@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.dernovyi.picture_hosting.model.MyUser;
 import pl.dernovyi.picture_hosting.security.SecurityService;
 import pl.dernovyi.picture_hosting.service.UserService;
@@ -29,12 +26,12 @@ public class SecurityController {
         this.userValidator = userValidator;
     }
 
-    @GetMapping({"/", "/welcome"})
+    @RequestMapping(value = {"/", "/welcome"},  method = RequestMethod.GET)
     public String welcome() {
         return "welcome";
     }
 
-    @GetMapping("/registration")
+    @RequestMapping(value = "/registration",  method = RequestMethod.GET)
     public String registration(Model model) {
         if (securityService.isAuthenticated()) {
             return "redirect:/";
@@ -44,7 +41,7 @@ public class SecurityController {
         return "registration";
     }
 
-    @PostMapping("/registration")
+    @RequestMapping(value = "/registration",  method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") MyUser userForm, BindingResult bindingResult, HttpServletRequest request) {
         userValidator.validate(userForm, bindingResult);
 
@@ -59,7 +56,7 @@ public class SecurityController {
         return "redirect:/welcome";
     }
 
-    @GetMapping("/login")
+    @RequestMapping(value = "/login",  method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
 
         if (securityService.isAuthenticated()) {
@@ -74,7 +71,7 @@ public class SecurityController {
 
         return "login";
     }
-    @GetMapping("/verify-token")
+    @RequestMapping(value = "/verify-token",  method = RequestMethod.GET)
     public String verify(@RequestParam String token){
         userService.verifyToken(token);
         return "login";

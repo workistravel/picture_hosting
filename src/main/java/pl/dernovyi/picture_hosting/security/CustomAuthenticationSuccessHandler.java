@@ -22,7 +22,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             httpServletResponse.sendRedirect("admin");
         }
         else{
-           httpServletResponse.sendRedirect("/user");
+           httpServletResponse.sendRedirect("user");
         }
     }
 }
