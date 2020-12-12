@@ -11,7 +11,6 @@ import pl.dernovyi.picture_hosting.service.UserService;
 import pl.dernovyi.picture_hosting.service.UserValidator;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 
 @Controller
 public class SecurityController {
@@ -36,7 +35,6 @@ public class SecurityController {
         if (securityService.isAuthenticated()) {
             return "redirect:/";
         }
-
         model.addAttribute("userForm", new MyUser());
         return "registration";
     }
@@ -50,9 +48,7 @@ public class SecurityController {
         }
 
         userService.save(userForm, request);
-
         securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
-
         return "redirect:/welcome";
     }
 
@@ -60,7 +56,6 @@ public class SecurityController {
     public String login(Model model, String error, String logout) {
 
         if (securityService.isAuthenticated()) {
-
             return "redirect:/";
         }
         if (error != null)

@@ -1,6 +1,7 @@
 package pl.dernovyi.picture_hosting.service;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.junit4.SpringRunner;
 import pl.dernovyi.picture_hosting.model.MyUser;
 import pl.dernovyi.picture_hosting.model.Role;
 import pl.dernovyi.picture_hosting.reposirory.RoleRepo;
@@ -17,6 +19,7 @@ import pl.dernovyi.picture_hosting.reposirory.UserRepo;
 import javax.servlet.http.HttpServletRequest;
 
 import static org.mockito.Mockito.*;
+@RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 class UserServiceImplTest {

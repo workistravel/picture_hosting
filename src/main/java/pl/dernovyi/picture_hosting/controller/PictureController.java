@@ -1,6 +1,5 @@
 package pl.dernovyi.picture_hosting.controller;
 
-import net.bytebuddy.pool.TypePool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +17,10 @@ import java.security.Principal;
 @Controller
 public class PictureController {
 
-    private  StorageService storageService;
-    private  UserService userService;
-    private  SecurityService securityService;
-    private  PictureService pictureService;
+    private final StorageService storageService;
+    private final UserService userService;
+    private final SecurityService securityService;
+    private final PictureService pictureService;
 
     @Autowired
     public PictureController(StorageService storageService, UserService userService, SecurityService securityService, PictureService pictureService) {
@@ -55,12 +54,12 @@ public class PictureController {
         if (securityService.isAuthenticated()) {
             URI uri = storageService.saveToStorage(multipartFile);
             pictureService.addPictureToUser(uri, name);
-            return "redirect:/login";
+            return "redirect:/admin";
         }
         return "redirect:/";
     }
     @GetMapping("/all")
     public  String getAll() {
-        return "available for all";
+        return "for all";
     }
 }

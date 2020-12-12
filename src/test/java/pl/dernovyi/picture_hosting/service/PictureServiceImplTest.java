@@ -2,11 +2,13 @@ package pl.dernovyi.picture_hosting.service;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 import pl.dernovyi.picture_hosting.model.MyUser;
 import pl.dernovyi.picture_hosting.model.Picture;
 import pl.dernovyi.picture_hosting.reposirory.PictureRepo;
@@ -18,12 +20,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
-
+@RunWith(SpringRunner.class)
 @SpringBootTest
 class PictureServiceImplTest {
 
-    @Mock
-    PictureService pictureService;
     @Mock
     PictureRepo pictureRepo;
     @Mock

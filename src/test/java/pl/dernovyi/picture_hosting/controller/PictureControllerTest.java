@@ -1,11 +1,13 @@
 package pl.dernovyi.picture_hosting.controller;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.dernovyi.picture_hosting.security.SecurityService;
 import static org.mockito.BDDMockito.given;
@@ -15,6 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+@RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 class PictureControllerTest {
@@ -37,7 +40,6 @@ class PictureControllerTest {
 
     @Test
     void should_user_get_view_status_301_unauthorized() throws Exception{
-        given(securityService.isAuthenticated()).willReturn(false);
         mockMvc.perform(get("/user"))
                 .andExpect(status().isUnauthorized());
 
